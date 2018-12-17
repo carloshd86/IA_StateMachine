@@ -6,5 +6,5 @@ ChangeImageAction::ChangeImageAction(const StateMachine& stateMachine) :
 	imageIndex (0) {}
 
 void ChangeImageAction::start() {
-	mStateMachine.getCharacter().SetImage(imageIndex);
+	mStateMachine.getEntity()->SetImage(imageIndex);
 }

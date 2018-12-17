@@ -2,7 +2,7 @@
 #define __STATE_MACHINE_H__
 
 #include <vector>
-#include "character.h"
+#include "gameEntity.h"
 
 class State;
 class Action;
@@ -10,14 +10,14 @@ class TiXmlElement;
 
 class StateMachine {
 public:
-	StateMachine(Character& character, const char* filename);
+	StateMachine(GameEntity* entity, const char* filename);
 	~StateMachine();
 
 	void load   ();
 	void start  ();
 	void update ();
 
-	Character& getCharacter() const;
+	GameEntity* getEntity() const;
 
 private:
 	State*  getStateInstance  (int stateId);
@@ -26,7 +26,7 @@ private:
 	const char*           mFilename;
 	std::map<int, State*> mStates;
 	State*                mCurrentState;
-	Character&            mCharacter;
+	GameEntity*           mEntity;
 };
 
 #endif

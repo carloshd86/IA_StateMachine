@@ -6,6 +6,7 @@
 #include <steering\pursueSteering.h>
 #include <steering/alignToMovementSteering.h>
 #include <character.h>
+#include <stateMachines/stateMachine.h>
 
 const float Enemy::MIN_DISTANCE_TO_REACH_TARGET = 25.f;
 
@@ -14,7 +15,10 @@ Enemy::Enemy() :
 	mAngularVelocity (0.0f),
 	mSteering        (nullptr),
 	mAlignSteering   (nullptr),
-	mTarget          (nullptr)
+	mTarget          (nullptr),
+	mStateMachine    (nullptr),
+	mLifePoints      (1),
+	mHit             (false)
 
 {
 	RTTI_BEGIN
@@ -42,6 +46,10 @@ void Enemy::OnStart()
 	//	mSteering = new PursueSteering(*this, *mTarget);
 
 	mAlignSteering = new AlignToMovementSteering(*this);
+
+	mStateMachine = new StateMachine(this, "enemy_state_machine.xml");
+	mStateMachine->load();
+	mStateMachine->start();
 }
 
 void Enemy::OnStop()
@@ -90,8 +98,36 @@ void Enemy::DrawDebug()
 	if (mAlignSteering) mAlignSteering->DrawDebug();
 }
 
+void Enemy::SetLifePoints(int lifePoints) {
+	if (lifePoints < 0) lifePoints = 0;
+	mLifePoints = lifePoints;
+}
 
+void Enemy::Damage(int lifePoints) {
+	SetLifePoints(mLifePoints - lifePoints);
+	mHit = true;
+}
 
+bool Enemy::IsDead() {
+	return mLifePoints > 0;
+}
+
+bool Enemy::GetHit() {
+	return mHit;
+}
+
+void Enemy::SetHit(bool hit) {
+	mHit = hit;
+}
+
+USVec2D Enemy::GetTargetPoint() {
+	return mTargetPoint;
+}
+
+void Enemy::SetTargetPoint(float x, float y) {
+	mTargetPoint.mX = x;
+	mTargetPoint.mY = y;
+}
 
 
 // Lua configuration
@@ -104,6 +140,7 @@ void Enemy::RegisterLuaFuncs(MOAILuaState& state)
 		{ "setLinearVel",			_setLinearVel},
 		{ "setAngularVel",			_setAngularVel},
 		{ "setTarget",			    _setTarget},
+	    { "setLifePoints",			_setLifePoints},
 		{ NULL, NULL }
 	};
 
@@ -137,5 +174,15 @@ int Enemy::_setTarget(lua_State* L)
 	GameEntity * entity = state.GetLuaObject<Character>(2, true);
 	if (entity)
 		self->SetTarget(*entity);
+	return 0;	
+}
+
+int Enemy::_setLifePoints(lua_State* L)
+{
+	MOAI_LUA_SETUP(Enemy, "U")
+
+	int lifePoints = state.GetValue<int>(2, true);
+	self->SetLifePoints(lifePoints);
+
 	return 0;	
 }

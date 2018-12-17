@@ -17,9 +17,6 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="params.cpp" />
-    <ClCompile Include="stateMachines\State.cpp">
-      <Filter>stateMachines</Filter>
-    </ClCompile>
     <ClCompile Include="stateMachines\Transition.cpp">
       <Filter>stateMachines</Filter>
     </ClCompile>
@@ -49,42 +46,66 @@
     </ClCompile>
     <ClCompile Include="obstacles.cpp" />
     <ClCompile Include="pathPoints.cpp" />
-    <ClCompile Include="stateMachines\condition.cpp">
-      <Filter>stateMachines</Filter>
-    </ClCompile>
     <ClCompile Include="stateMachines\stateMachine.cpp">
       <Filter>stateMachines</Filter>
     </ClCompile>
-    <ClCompile Include="stateMachines\canSeeEnemy.cpp">
-      <Filter>stateMachines</Filter>
-    </ClCompile>
-    <ClCompile Include="stateMachines\canAttackEnemy.cpp">
-      <Filter>stateMachines</Filter>
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="stateMachines\attackState.cpp">
+      <Filter>stateMachines\states</Filter>
     </ClCompile>
     <ClCompile Include="stateMachines\idleState.cpp">
-      <Filter>stateMachines</Filter>
+      <Filter>stateMachines\states</Filter>
     </ClCompile>
-    <ClCompile Include="stateMachines\action.cpp">
-      <Filter>stateMachines</Filter>
-    </ClCompile>
-    <ClCompile Include="stateMachines\changeImageAction.cpp">
-      <Filter>stateMachines</Filter>
-    </ClCompile>
-    <ClCompile Include="stateMachines\pursueEnemyAction.cpp">
-      <Filter>stateMachines</Filter>
-    </ClCompile>
-    <ClCompile Include="stateMachines\cannotAttackEnemycpp.cpp">
-      <Filter>stateMachines</Filter>
-    </ClCompile>
-    <ClCompile Include="enemy.cpp" />
     <ClCompile Include="stateMachines\pursueState.cpp">
-      <Filter>stateMachines</Filter>
-    </ClCompile>
-    <ClCompile Include="stateMachines\attackState.cpp">
-      <Filter>stateMachines</Filter>
+      <Filter>stateMachines\states</Filter>
     </ClCompile>
     <ClCompile Include="stateMachines\attackEnemyAction.cpp">
-      <Filter>stateMachines</Filter>
+      <Filter>stateMachines\actions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\canAttackEnemy.cpp">
+      <Filter>stateMachines\conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\cannotAttackEnemycpp.cpp">
+      <Filter>stateMachines\conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\canSeeEnemy.cpp">
+      <Filter>stateMachines\conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\changeImageAction.cpp">
+      <Filter>stateMachines\actions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\condition.cpp">
+      <Filter>stateMachines\conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\action.cpp">
+      <Filter>stateMachines\actions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\pursueEnemyAction.cpp">
+      <Filter>stateMachines\actions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\state.cpp">
+      <Filter>stateMachines\states</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\runawayState.cpp">
+      <Filter>stateMachines\states</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\deadState.cpp">
+      <Filter>stateMachines\states</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\setTargetPointAction.cpp">
+      <Filter>stateMachines\actions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\setDeadAction.cpp">
+      <Filter>stateMachines\actions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\reachedTargetPoint.cpp">
+      <Filter>stateMachines\conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\isHit.cpp">
+      <Filter>stateMachines\conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachines\isDead.cpp">
+      <Filter>stateMachines\conditions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,21 +122,6 @@
     </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="params.h" />
-    <ClInclude Include="stateMachines\Action.h">
-      <Filter>stateMachines</Filter>
-    </ClInclude>
-    <ClInclude Include="stateMachines\CanAttackEnemy.h">
-      <Filter>stateMachines</Filter>
-    </ClInclude>
-    <ClInclude Include="stateMachines\CanSeeEnemy.h">
-      <Filter>stateMachines</Filter>
-    </ClInclude>
-    <ClInclude Include="stateMachines\Condition.h">
-      <Filter>stateMachines</Filter>
-    </ClInclude>
-    <ClInclude Include="stateMachines\State.h">
-      <Filter>stateMachines</Filter>
-    </ClInclude>
     <ClInclude Include="stateMachines\Transition.h">
       <Filter>stateMachines</Filter>
     </ClInclude>
@@ -155,27 +161,63 @@
     <ClInclude Include="stateMachines\stateMachine.h">
       <Filter>stateMachines</Filter>
     </ClInclude>
-    <ClInclude Include="stateMachines\idleState.h">
-      <Filter>stateMachines</Filter>
-    </ClInclude>
-    <ClInclude Include="stateMachines\changeImageAction.h">
-      <Filter>stateMachines</Filter>
-    </ClInclude>
-    <ClInclude Include="stateMachines\pursueEnemyAction.h">
-      <Filter>stateMachines</Filter>
-    </ClInclude>
-    <ClInclude Include="stateMachines\cannotAttackEnemy.h">
-      <Filter>stateMachines</Filter>
-    </ClInclude>
     <ClInclude Include="enemy.h" />
-    <ClInclude Include="stateMachines\pursueState.h">
-      <Filter>stateMachines</Filter>
-    </ClInclude>
     <ClInclude Include="stateMachines\attackState.h">
-      <Filter>stateMachines</Filter>
+      <Filter>stateMachines\states</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\idleState.h">
+      <Filter>stateMachines\states</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\pursueState.h">
+      <Filter>stateMachines\states</Filter>
     </ClInclude>
     <ClInclude Include="stateMachines\attackEnemyAction.h">
-      <Filter>stateMachines</Filter>
+      <Filter>stateMachines\actions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\canAttackEnemy.h">
+      <Filter>stateMachines\conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\cannotAttackEnemy.h">
+      <Filter>stateMachines\conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\canSeeEnemy.h">
+      <Filter>stateMachines\conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\changeImageAction.h">
+      <Filter>stateMachines\actions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\condition.h">
+      <Filter>stateMachines\conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\action.h">
+      <Filter>stateMachines\actions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\pursueEnemyAction.h">
+      <Filter>stateMachines\actions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\state.h">
+      <Filter>stateMachines\states</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\runawayState.h">
+      <Filter>stateMachines\states</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\deadState.h">
+      <Filter>stateMachines\states</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\setTargetPointAction.h">
+      <Filter>stateMachines\actions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\setDeadAction.h">
+      <Filter>stateMachines\actions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\reachedTargetPoint.h">
+      <Filter>stateMachines\conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\isHit.h">
+      <Filter>stateMachines\conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\isDead.h">
+      <Filter>stateMachines\conditions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +232,15 @@
     </Filter>
     <Filter Include="steering">
       <UniqueIdentifier>{68027cf5-54b4-47b0-b62f-27c10912affc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stateMachines\states">
+      <UniqueIdentifier>{d3cf5fcc-7c81-47d9-a41e-bea63a8a25f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stateMachines\conditions">
+      <UniqueIdentifier>{de93febd-6dfb-4de6-8710-5f712da694e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stateMachines\actions">
+      <UniqueIdentifier>{b97f4c37-9992-4668-9fdd-05a43dc06819}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

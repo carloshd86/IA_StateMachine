@@ -12,8 +12,8 @@
 #include "cannotAttackEnemy.h"
 #include "canSeeEnemy.h"
 
-StateMachine::StateMachine(Character& character, const char* filename) :
-	mCharacter    (character),
+StateMachine::StateMachine(GameEntity* entity, const char* filename) :
+	mEntity       (entity),
     mFilename     (filename),
 	mCurrentState (nullptr) {}
 
@@ -130,8 +130,8 @@ void StateMachine::update() {
 	}
 }
 
-Character& StateMachine::getCharacter() const {
-	return mCharacter;
+GameEntity* StateMachine::getEntity() const {
+	return mEntity;
 }
 
 State* StateMachine::getStateInstance(int stateId) {

@@ -7,6 +7,8 @@
 #include "pathPoints.h"
 #include "obstacles.h"
 
+class StateMachine;
+
 class Enemy: public GameEntity
 {
 public:
@@ -32,6 +34,14 @@ public:
 	const PathPoints& GetPathPoints() const { return mPathPoints; }
 	const Obstacles& GetObstacles() const { return mObstacles; }
 
+	void    SetLifePoints  (int lifePoints);
+	void    Damage         (int lifePoints);
+	bool    IsDead         ();
+	bool    GetHit         ();
+	void    SetHit         (bool hit);
+	USVec2D GetTargetPoint ();
+	void    SetTargetPoint (float x, float y);
+
 private:
 
 	static const float MIN_DISTANCE_TO_REACH_TARGET;
@@ -43,9 +53,14 @@ private:
 	PathPoints mPathPoints;
 	Obstacles mObstacles;
 
-	ISteering      * mSteering;
-	IAlignSteering * mAlignSteering;
-	GameEntity     * mTarget;
+	ISteering*      mSteering;
+	IAlignSteering* mAlignSteering;
+	GameEntity*     mTarget;
+	StateMachine*   mStateMachine;
+
+	int  mLifePoints;
+	bool mHit;
+	USVec2D mTargetPoint;
 
 	// Lua configuration
 public:
@@ -54,6 +69,7 @@ private:
 	static int _setLinearVel(lua_State* L);
 	static int _setAngularVel(lua_State* L);
 	static int _setTarget(lua_State* L);
+	static int _setLifePoints(lua_State* L);
 };
 
 #endif

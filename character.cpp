@@ -42,7 +42,7 @@ void Character::OnStart()
 
 	mAlignSteering = new AlignToMovementSteering(*this);
 
-	mStateMachine = new StateMachine(*this, "state_machine.xml");
+	mStateMachine = new StateMachine(this, "character_state_machine.xml");
 	mStateMachine->load();
 	mStateMachine->start();
 }
