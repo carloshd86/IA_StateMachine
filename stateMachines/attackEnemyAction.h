@@ -12,6 +12,8 @@ public:
 	void start();
 	void update();
 	void end();
+
+	int damagePoints;
 };
 
 #endif

@@ -32,7 +32,7 @@
 		<state id="3" name="attack">
 			<enter_action id="1" name="changeImage" image_index="3"></enter_action>
 			<exit_action></exit_action>
-			<state_action id="3" name="attack"></state_action>
+			<state_action id="3" name="attack" damage_points="1"></state_action>
 			<transitions>
 				<transition>
 					<condition id="3" name="cannotAttackEnemy" distance="50"></condition>

@@ -59,6 +59,8 @@ void Enemy::OnStop()
 
 void Enemy::OnUpdate(float step)
 {
+	mStateMachine->update();
+
 	USVec3D pos             = GetLoc();
 	float   rot             = GetRot();
 
@@ -109,7 +111,7 @@ void Enemy::Damage(int lifePoints) {
 }
 
 bool Enemy::IsDead() {
-	return mLifePoints > 0;
+	return mLifePoints <= 0;
 }
 
 bool Enemy::GetHit() {

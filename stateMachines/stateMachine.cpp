@@ -5,12 +5,17 @@
 #include "idleState.h"
 #include "pursueState.h"
 #include "attackState.h"
+#include "deadState.h"
+#include "runawayState.h"
 #include "changeImageAction.h"
 #include "pursueEnemyAction.h"
 #include "attackEnemyAction.h"
 #include "canAttackEnemy.h"
 #include "cannotAttackEnemy.h"
 #include "canSeeEnemy.h"
+#include "isDead.h"
+#include "isHit.h"
+#include "reachedTargetPoint.h"
 
 StateMachine::StateMachine(GameEntity* entity, const char* filename) :
 	mEntity       (entity),
@@ -94,6 +99,21 @@ void StateMachine::load() {
 							static_cast<CannotAttackEnemy*>(condition)->distance = distance;
 							break;
 						}
+						case 4: {
+							condition = new IsDead(*this);
+							break;
+						}
+						case 5: {
+							condition = new IsHit(*this);
+							break;
+						}
+						case 6: {
+							condition = new ReachedTargetPoint(*this);
+							float distance = 0;
+							conditionElem->Attribute("distance", &distance);
+							static_cast<ReachedTargetPoint*>(condition)->distance = distance;
+							break;
+						}
 					}
 					
 					TiXmlElement* targetStateElem = transitionElem->FirstChildElement("target_state");
@@ -154,6 +174,14 @@ State* StateMachine::getStateInstance(int stateId) {
 				state = new AttackState(*this);
 				break;
 			}
+			case 4: {
+				state = new RunawayState(*this);
+				break;
+			}
+			case 5: {
+				state = new DeadState(*this);
+				break;
+			}
 		}
 		if (state) {
 			mStates[stateId] = state;
@@ -181,6 +209,9 @@ Action* StateMachine::getActionInstance(TiXmlElement* actionElem) {
 		}
 		case 3: {
 			action = new AttackEnemyAction(*this);
+			int damagePoints = 0;
+			actionElem->Attribute("damage_points", &damagePoints);
+			static_cast<AttackEnemyAction*>(action)->damagePoints = damagePoints;
 			break;
 		}
 	}
