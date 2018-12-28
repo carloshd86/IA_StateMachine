@@ -76,13 +76,6 @@ void Enemy::OnUpdate(float step)
 		USVec2D linearAcceleration = mSteering->GetSteering();
 		mLinearVelocity.mX += linearAcceleration.mX * step;
 		mLinearVelocity.mY += linearAcceleration.mY * step;
-
-		USVec2D pos2d(pos);
-		USVec2D targetPos2d(mTarget->GetLoc());
-		if (pos2d.DistSqrd(targetPos2d) < MIN_DISTANCE_TO_REACH_TARGET * MIN_DISTANCE_TO_REACH_TARGET) {
-			pos.mX = 0;
-			pos.mY = 0;
-		}
 	}
 
 	if (mAlignSteering) {
@@ -129,6 +122,11 @@ USVec2D Enemy::GetTargetPoint() {
 void Enemy::SetTargetPoint(float x, float y) {
 	mTargetPoint.mX = x;
 	mTargetPoint.mY = y;
+}
+
+void Enemy::SetSteering(ISteering* steering) {
+	if (mSteering) delete mSteering;
+	mSteering = steering;
 }
 
 

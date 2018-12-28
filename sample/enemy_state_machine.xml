@@ -19,7 +19,7 @@
 		</state>
 		<state id="4" name="runaway">
 			<enter_action id="1" name="changeImage" image_index="4"></enter_action>
-			<exit_action></exit_action>
+			<exit_action id="5" name="restoreHit"></exit_action>
 			<state_action></state_action>
 			<transitions>
 				<transition>

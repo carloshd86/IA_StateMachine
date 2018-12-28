@@ -3,8 +3,6 @@
 
 #include "action.h"
 
-class Character;
-
 class SetDeadAction : public Action {
 public:
 	SetDeadAction(const StateMachine& stateMachine);

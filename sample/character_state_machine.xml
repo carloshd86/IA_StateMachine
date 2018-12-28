@@ -36,7 +36,7 @@
 			<transitions>
 				<transition>
 					<condition id="3" name="cannotAttackEnemy" distance="50"></condition>
-					<target_state id="2" name="pursue"></target_state>
+					<target_state id="1" name="idle"></target_state>
 					<trigger_action></trigger_action>
 				</transition>
 			</transitions>

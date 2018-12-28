@@ -14,7 +14,7 @@ bool CanSeeEnemy::check() const {
 	if (character) {
 		Enemy* enemy = character->GetEnemy();
 		if (enemy) {
-			result = (enemy->GetLoc() - character->GetLoc()).Length() <= distance;
+			result = !enemy->IsDead() && !enemy->GetHit() && (enemy->GetLoc() - character->GetLoc()).Length() <= distance;
 		}
 	}
 	return result;

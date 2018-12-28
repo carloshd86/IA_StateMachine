@@ -107,6 +107,9 @@
     <ClCompile Include="stateMachines\isDead.cpp">
       <Filter>stateMachines\conditions</Filter>
     </ClCompile>
+    <ClCompile Include="stateMachines\restoreHitAction.cpp">
+      <Filter>stateMachines\actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
@@ -218,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="stateMachines\isDead.h">
       <Filter>stateMachines\conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\restoreHitAction.h">
+      <Filter>stateMachines\actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

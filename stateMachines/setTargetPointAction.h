@@ -3,8 +3,6 @@
 
 #include "action.h"
 
-class Character;
-
 class SetTargetPointAction : public Action {
 public:
 	SetTargetPointAction(const StateMachine& stateMachine);

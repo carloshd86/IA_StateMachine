@@ -10,6 +10,8 @@
 #include "changeImageAction.h"
 #include "pursueEnemyAction.h"
 #include "attackEnemyAction.h"
+#include "setTargetPointAction.h"
+#include "restoreHitAction.h"
 #include "canAttackEnemy.h"
 #include "cannotAttackEnemy.h"
 #include "canSeeEnemy.h"
@@ -212,6 +214,14 @@ Action* StateMachine::getActionInstance(TiXmlElement* actionElem) {
 			int damagePoints = 0;
 			actionElem->Attribute("damage_points", &damagePoints);
 			static_cast<AttackEnemyAction*>(action)->damagePoints = damagePoints;
+			break;
+		}
+		case 4: {
+			action = new SetTargetPointAction(*this);
+			break;
+		}
+		case 5: {
+			action = new RestoreHitAction(*this);
 			break;
 		}
 	}

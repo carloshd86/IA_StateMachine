@@ -3,8 +3,6 @@
 
 #include "action.h"
 
-class Character;
-
 class AttackEnemyAction : public Action {
 public:
 	AttackEnemyAction(const StateMachine& stateMachine);

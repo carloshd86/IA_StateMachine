@@ -47,7 +47,7 @@ enemy:setLoc(0, 0)
 enemy:setRot(0)
 enemy:setLinearVel(0, 0)
 enemy:setAngularVel(0)
-enemy:setLifePoints(2)
+enemy:setLifePoints(3)
 
 -- Character
 prop = MOAIProp2D.new()

@@ -149,6 +149,7 @@
     <ClCompile Include="stateMachines\pursueEnemyAction.cpp" />
     <ClCompile Include="stateMachines\pursueState.cpp" />
     <ClCompile Include="stateMachines\reachedTargetPoint.cpp" />
+    <ClCompile Include="stateMachines\restoreHitAction.cpp" />
     <ClCompile Include="stateMachines\runawayState.cpp" />
     <ClCompile Include="stateMachines\setDeadAction.cpp" />
     <ClCompile Include="stateMachines\setTargetPointAction.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="stateMachines\pursueEnemyAction.h" />
     <ClInclude Include="stateMachines\pursueState.h" />
     <ClInclude Include="stateMachines\reachedTargetPoint.h" />
+    <ClInclude Include="stateMachines\restoreHitAction.h" />
     <ClInclude Include="stateMachines\runawayState.h" />
     <ClInclude Include="stateMachines\setDeadAction.h" />
     <ClInclude Include="stateMachines\setTargetPointAction.h" />

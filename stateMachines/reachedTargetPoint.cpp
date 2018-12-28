@@ -11,8 +11,7 @@ bool ReachedTargetPoint::check() const {
 
 	Enemy* enemy = static_cast<Enemy*>(mStateMachine.getEntity());
 	if (enemy) {
-		// TODO crear el método gettargetpoint
-		//result = (enemy->GetLoc() - enemy->GetTargetPoint()).Length() <= distance;
+		result = (enemy->GetLoc() - enemy->GetTargetPoint()).Length() <= distance;
 	}
 	return result;
 }
