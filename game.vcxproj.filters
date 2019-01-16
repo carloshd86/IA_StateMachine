@@ -225,6 +225,9 @@
     <ClInclude Include="stateMachines\restoreHitAction.h">
       <Filter>stateMachines\actions</Filter>
     </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>application</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="host">
@@ -247,6 +250,9 @@
     </Filter>
     <Filter Include="stateMachines\actions">
       <UniqueIdentifier>{b97f4c37-9992-4668-9fdd-05a43dc06819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application">
+      <UniqueIdentifier>{e4c2ad48-e9e5-49cd-a9e3-5593d7d630b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

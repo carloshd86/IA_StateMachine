@@ -18,6 +18,7 @@
 #include "isDead.h"
 #include "isHit.h"
 #include "reachedTargetPoint.h"
+#include "globals.h"
 
 StateMachine::StateMachine(GameEntity* entity, const char* filename) :
 	mEntity       (entity),
@@ -80,36 +81,36 @@ void StateMachine::load() {
 					TiXmlElement* conditionElem = transitionElem->FirstChildElement("condition");
 					conditionElem->Attribute("id", &conditionId);
 					switch (conditionId) {
-						case 1: {
+						case C_CanSeeEnemy: {
 							condition = new CanSeeEnemy(*this);
 							float distance = 0;
 							conditionElem->Attribute("distance", &distance);
 							static_cast<CanSeeEnemy*>(condition)->distance = distance;
 							break;
 						}
-						case 2: {
+						case C_CanAttackEnemy: {
 							condition = new CanAttackEnemy(*this);
 							float distance = 0;
 							conditionElem->Attribute("distance", &distance);
 							static_cast<CanAttackEnemy*>(condition)->distance = distance;
 							break;
 						}
-						case 3: {
+						case C_CannotAttackEnemy: {
 							condition = new CannotAttackEnemy(*this);
 							float distance = 0;
 							conditionElem->Attribute("distance", &distance);
 							static_cast<CannotAttackEnemy*>(condition)->distance = distance;
 							break;
 						}
-						case 4: {
+						case C_IsDead: {
 							condition = new IsDead(*this);
 							break;
 						}
-						case 5: {
+						case C_IsHit: {
 							condition = new IsHit(*this);
 							break;
 						}
-						case 6: {
+						case C_ReachedTargetPoint: {
 							condition = new ReachedTargetPoint(*this);
 							float distance = 0;
 							conditionElem->Attribute("distance", &distance);
@@ -164,26 +165,11 @@ State* StateMachine::getStateInstance(int stateId) {
 	}
 	else {
 		switch (stateId) {
-			case 1: {
-				state = new IdleState(*this);
-				break;
-			}
-			case 2: {
-				state = new PursueState(*this);
-				break;
-			}
-			case 3: {
-				state = new AttackState(*this);
-				break;
-			}
-			case 4: {
-				state = new RunawayState(*this);
-				break;
-			}
-			case 5: {
-				state = new DeadState(*this);
-				break;
-			}
+			case S_Idle:    { state = new IdleState(*this);    break; }
+			case S_Pursue:  { state = new PursueState(*this);  break; }
+			case S_Attack:  { state = new AttackState(*this);  break; }
+			case S_Runaway: { state = new RunawayState(*this); break; }
+			case S_Dead:    { state = new DeadState(*this);    break;     }
 		}
 		if (state) {
 			mStates[stateId] = state;
@@ -198,29 +184,29 @@ Action* StateMachine::getActionInstance(TiXmlElement* actionElem) {
 	int actionId = 0;
 	actionElem->Attribute("id", &actionId);
 	switch (actionId) {
-		case 1: {
+		case A_ChangeImage: {
 			action = new ChangeImageAction(*this);
 			int imageIndex = 0;
 			actionElem->Attribute("image_index", &imageIndex);
 			static_cast<ChangeImageAction*>(action)->imageIndex = imageIndex;
 			break;
 		}
-		case 2: {
+		case A_PursueEnemy: {
 			action = new PursueEnemyAction(*this);
 			break;
 		}
-		case 3: {
+		case A_AttackEnemy: {
 			action = new AttackEnemyAction(*this);
 			int damagePoints = 0;
 			actionElem->Attribute("damage_points", &damagePoints);
 			static_cast<AttackEnemyAction*>(action)->damagePoints = damagePoints;
 			break;
 		}
-		case 4: {
+		case A_SetTargetPoint: {
 			action = new SetTargetPointAction(*this);
 			break;
 		}
-		case 5: {
+		case A_RestoreHit: {
 			action = new RestoreHitAction(*this);
 			break;
 		}

@@ -173,6 +173,7 @@
     <ClInclude Include="enemy.h" />
     <ClInclude Include="gameConfig.h" />
     <ClInclude Include="gameEntity.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="host\FolderWatcher-win.h" />
     <ClInclude Include="host\GlutHost.h" />
     <ClInclude Include="host\ParticlePresets.h" />
