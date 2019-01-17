@@ -110,6 +110,9 @@
     <ClCompile Include="stateMachines\restoreHitAction.cpp">
       <Filter>stateMachines\actions</Filter>
     </ClCompile>
+    <ClCompile Include="stateMachines\circularMovementAction.cpp">
+      <Filter>stateMachines\actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
@@ -227,6 +230,9 @@
     </ClInclude>
     <ClInclude Include="globals.h">
       <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachines\circularMovementAction.h">
+      <Filter>stateMachines\actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

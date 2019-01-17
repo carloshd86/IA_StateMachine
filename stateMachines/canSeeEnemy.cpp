@@ -14,7 +14,9 @@ bool CanSeeEnemy::check() const {
 	if (character) {
 		Enemy* enemy = character->GetEnemy();
 		if (enemy) {
-			result = !enemy->IsDead() && !enemy->GetHit() && (enemy->GetLoc() - character->GetLoc()).Length() <= distance;
+			USVec2D dis = (enemy->GetLoc() - character->GetLoc());
+			float fdis = dis.Length();
+			result = !enemy->IsDead() && !enemy->GetHit() && fdis <= distance;
 		}
 	}
 	return result;

@@ -3,12 +3,12 @@
 		<state id="1" name="idle">
 			<enter_action id="1" name="changeImage" image_index="1"></enter_action>
 			<exit_action></exit_action>
-			<state_action></state_action>
+			<state_action id="6" name="circularMovement" radius="50" reverse="1" speed="90"></state_action>
 			<transitions>
 				<transition>
 					<condition id="4" name="isDead"></condition>
 					<target_state id="5" name="dead"></target_state>
-					<trigger_action></trigger_action>
+					<trigger_action id="7" name="setDead"></trigger_action>
 				</transition>
 				<transition>
 					<condition id="5" name="isHit"></condition>
@@ -25,7 +25,7 @@
 				<transition>
 					<condition id="4" name="isDead"></condition>
 					<target_state id="5" name="dead"></target_state>
-					<trigger_action  id="5" name="setDead"></trigger_action>
+					<trigger_action id="7" name="setDead"></trigger_action>
 				</transition>
 				<transition>
 					<condition id="6" name="reachedTargetPoint" distance="50"></condition>

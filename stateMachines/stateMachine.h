@@ -6,6 +6,7 @@
 
 class State;
 class Action;
+class Condition;
 class TiXmlElement;
 
 class StateMachine {
@@ -20,8 +21,9 @@ public:
 	GameEntity* getEntity() const;
 
 private:
-	State*  getStateInstance  (int stateId);
-	Action* getActionInstance (TiXmlElement* actionElem);
+	State*     getStateInstance     (int stateId);
+	Action*    getActionInstance    (TiXmlElement* actionElem);
+	Condition* getConditionInstance (TiXmlElement* conditionElem);
 
 	const char*           mFilename;
 	std::map<int, State*> mStates;

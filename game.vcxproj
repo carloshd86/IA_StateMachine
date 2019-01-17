@@ -141,6 +141,7 @@
     <ClCompile Include="stateMachines\cannotAttackEnemycpp.cpp" />
     <ClCompile Include="stateMachines\canSeeEnemy.cpp" />
     <ClCompile Include="stateMachines\changeImageAction.cpp" />
+    <ClCompile Include="stateMachines\circularMovementAction.cpp" />
     <ClCompile Include="stateMachines\condition.cpp" />
     <ClCompile Include="stateMachines\deadState.cpp" />
     <ClCompile Include="stateMachines\idleState.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="stateMachines\cannotAttackEnemy.h" />
     <ClInclude Include="stateMachines\canSeeEnemy.h" />
     <ClInclude Include="stateMachines\changeImageAction.h" />
+    <ClInclude Include="stateMachines\circularMovementAction.h" />
     <ClInclude Include="stateMachines\condition.h" />
     <ClInclude Include="stateMachines\deadState.h" />
     <ClInclude Include="stateMachines\idleState.h" />

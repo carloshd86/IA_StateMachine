@@ -42,6 +42,8 @@ public:
 	USVec2D GetTargetPoint ();
 	void    SetTargetPoint (float x, float y);
 	void    SetSteering    (ISteering* steering);
+	void    RemoveSteering ();
+	void    Kill();
 
 private:
 

@@ -12,6 +12,8 @@
 #include "attackEnemyAction.h"
 #include "setTargetPointAction.h"
 #include "restoreHitAction.h"
+#include "circularMovementAction.h"
+#include "setDeadAction.h"
 #include "canAttackEnemy.h"
 #include "cannotAttackEnemy.h"
 #include "canSeeEnemy.h"
@@ -76,48 +78,7 @@ void StateMachine::load() {
 				TiXmlHandle hTransitions = stateElem->FirstChildElement("transitions");
 				TiXmlElement* transitionElem = hTransitions.FirstChild().Element();
 				for (transitionElem; transitionElem; transitionElem = transitionElem->NextSiblingElement()) {
-					Condition* condition = nullptr;
-					int conditionId = 0;
-					TiXmlElement* conditionElem = transitionElem->FirstChildElement("condition");
-					conditionElem->Attribute("id", &conditionId);
-					switch (conditionId) {
-						case C_CanSeeEnemy: {
-							condition = new CanSeeEnemy(*this);
-							float distance = 0;
-							conditionElem->Attribute("distance", &distance);
-							static_cast<CanSeeEnemy*>(condition)->distance = distance;
-							break;
-						}
-						case C_CanAttackEnemy: {
-							condition = new CanAttackEnemy(*this);
-							float distance = 0;
-							conditionElem->Attribute("distance", &distance);
-							static_cast<CanAttackEnemy*>(condition)->distance = distance;
-							break;
-						}
-						case C_CannotAttackEnemy: {
-							condition = new CannotAttackEnemy(*this);
-							float distance = 0;
-							conditionElem->Attribute("distance", &distance);
-							static_cast<CannotAttackEnemy*>(condition)->distance = distance;
-							break;
-						}
-						case C_IsDead: {
-							condition = new IsDead(*this);
-							break;
-						}
-						case C_IsHit: {
-							condition = new IsHit(*this);
-							break;
-						}
-						case C_ReachedTargetPoint: {
-							condition = new ReachedTargetPoint(*this);
-							float distance = 0;
-							conditionElem->Attribute("distance", &distance);
-							static_cast<ReachedTargetPoint*>(condition)->distance = distance;
-							break;
-						}
-					}
+					Condition* condition = getConditionInstance(transitionElem->FirstChildElement("condition"));
 					
 					TiXmlElement* targetStateElem = transitionElem->FirstChildElement("target_state");
 					int targetStateId = 0;
@@ -210,7 +171,75 @@ Action* StateMachine::getActionInstance(TiXmlElement* actionElem) {
 			action = new RestoreHitAction(*this);
 			break;
 		}
+		case A_CircularMovement: {
+			int radius = 0;
+			actionElem->Attribute("radius", &radius);
+			if (!&radius) radius = 0;
+
+			int iReverse = 0;
+			actionElem->Attribute("reverse", &iReverse);
+			bool reverse = false;
+			if (!&iReverse) reverse = false;
+			else reverse = iReverse;
+
+			float speed = 0.f;
+			actionElem->Attribute("speed", &speed);
+			if (!&speed) speed = 0.f;
+
+			action = new CircularMovementAction(*this, radius, reverse, speed);
+			break;
+		}
+		case A_SetDead: {
+			action = new SetDeadAction(*this);
+			break;
+		}
 	}
 
 	return action;
+}
+
+Condition* StateMachine::getConditionInstance(TiXmlElement* conditionElem) {
+	Condition* condition = nullptr;
+	int conditionId = 0;
+	conditionElem->Attribute("id", &conditionId);
+	switch (conditionId) {
+		case C_CanSeeEnemy: {
+			condition = new CanSeeEnemy(*this);
+			float distance = 0;
+			conditionElem->Attribute("distance", &distance);
+			static_cast<CanSeeEnemy*>(condition)->distance = distance;
+			break;
+		}
+		case C_CanAttackEnemy: {
+			condition = new CanAttackEnemy(*this);
+			float distance = 0;
+			conditionElem->Attribute("distance", &distance);
+			static_cast<CanAttackEnemy*>(condition)->distance = distance;
+			break;
+		}
+		case C_CannotAttackEnemy: {
+			condition = new CannotAttackEnemy(*this);
+			float distance = 0;
+			conditionElem->Attribute("distance", &distance);
+			static_cast<CannotAttackEnemy*>(condition)->distance = distance;
+			break;
+		}
+		case C_IsDead: {
+			condition = new IsDead(*this);
+			break;
+		}
+		case C_IsHit: {
+			condition = new IsHit(*this);
+			break;
+		}
+		case C_ReachedTargetPoint: {
+			condition = new ReachedTargetPoint(*this);
+			float distance = 0;
+			conditionElem->Attribute("distance", &distance);
+			static_cast<ReachedTargetPoint*>(condition)->distance = distance;
+			break;
+		}
+	}
+
+	return condition;
 }

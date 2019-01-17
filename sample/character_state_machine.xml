@@ -3,10 +3,10 @@
 		<state id="1" name="idle">
 			<enter_action id="1" name="changeImage" image_index="1"></enter_action>
 			<exit_action></exit_action>
-			<state_action></state_action>
+			<state_action id="6" name="circularMovement" radius="150" speed="120"></state_action>
 			<transitions>
 				<transition>
-					<condition id="1" name="canSeeEnemy" distance="200"></condition>
+					<condition id="1" name="canSeeEnemy" distance="350"></condition>
 					<target_state id="2" name="pursue"></target_state>
 					<trigger_action></trigger_action>
 				</transition>

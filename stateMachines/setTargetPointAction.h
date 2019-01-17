@@ -10,6 +10,9 @@ public:
 	void start();
 	void update();
 	void end();
+
+private:
+	static const float MIN_DISTANCE_NEXT_POINT;
 };
 
 #endif

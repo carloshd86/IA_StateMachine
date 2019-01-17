@@ -129,6 +129,17 @@ void Enemy::SetSteering(ISteering* steering) {
 	mSteering = steering;
 }
 
+void Enemy::RemoveSteering() {
+	SetSteering(nullptr);
+}
+
+
+void Enemy::Kill() {
+	RemoveSteering();
+	SetLinearVelocity(0, 0);
+	SetAngularVelocity(0);
+}
+
 
 // Lua configuration
 
