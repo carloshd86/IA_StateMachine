@@ -13,8 +13,7 @@ bool ReadPathPoints(const char* filename, PathPoints& pathPoints)
 
     TiXmlHandle hDoc(&doc);
 
-    TiXmlElement* pElem;
-    pElem = hDoc.FirstChildElement().Element();
+    TiXmlElement* pElem = hDoc.FirstChildElement().ToElement();
     if (!pElem)
     {
         fprintf(stderr, "Invalid format for %s", filename);
@@ -25,7 +24,7 @@ bool ReadPathPoints(const char* filename, PathPoints& pathPoints)
     TiXmlHandle hPoints = hRoot.FirstChildElement("points");
 
 	// Points
-	TiXmlElement* pointElem = hPoints.FirstChildElement("point").Element();
+	TiXmlElement* pointElem = hPoints.FirstChildElement("point").ToElement();
 	for (pointElem; pointElem; pointElem = pointElem->NextSiblingElement("point"))
 	{
 		USVec2D point;

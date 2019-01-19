@@ -45,7 +45,7 @@ void StateMachine::load() {
 		TiXmlHandle hDoc(&doc);
 
 		TiXmlElement* pStateMachine;
-		pStateMachine = hDoc.FirstChildElement().Element();
+		pStateMachine = hDoc.FirstChildElement().ToElement();
 		if (!pStateMachine) {
 			fprintf(stderr, "Invalid format for %s", mFilename);
 			return;
@@ -58,7 +58,7 @@ void StateMachine::load() {
 		TiXmlHandle hStates = hStateMachine.FirstChildElement(STATES_NODE_NAME);
 
 		// States
-		TiXmlElement* stateElem = hStates.FirstChild().Element();
+		TiXmlElement* stateElem = hStates.FirstChild().ToElement();
 		int stateIndex = 0;
 		for (stateElem; stateElem; stateElem = stateElem->NextSiblingElement()) {
 			int stateId = 0;
@@ -76,7 +76,7 @@ void StateMachine::load() {
 
 				// Transitions
 				TiXmlHandle hTransitions = stateElem->FirstChildElement(TRANSITIONS_NODE_NAME);
-				TiXmlElement* transitionElem = hTransitions.FirstChild().Element();
+				TiXmlElement* transitionElem = hTransitions.FirstChild().ToElement();
 				for (transitionElem; transitionElem; transitionElem = transitionElem->NextSiblingElement()) {
 					Condition* condition = getConditionInstance(transitionElem->FirstChildElement(CONDITION_NODE_NAME));
 					
@@ -103,7 +103,7 @@ void StateMachine::start() {
 void StateMachine::update() {
 	mCurrentState->update();
 	const Transitions& transitions = mCurrentState->getTransitions();
-	for(Transition* transition : transitions) {
+	for (Transition* transition : transitions) {
 		if (transition->canTrigger()) {
 			mCurrentState->onExit();
 			State* nextState = transition->trigger();
