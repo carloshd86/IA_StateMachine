@@ -34,4 +34,25 @@ enum eConditions {
 const int MAX_VIEWPORT_WIDTH_HALF  = 512;
 const int MAX_VIEWPORT_HEIGHT_HALF = 384;
 
+constexpr const char* STATES_NODE_NAME         = "states";
+constexpr const char* ENTER_ACTION_NODE_NAME   = "enter_action";
+constexpr const char* STATE_ACTION_NODE_NAME   = "state_action";
+constexpr const char* EXIT_ACTION_NODE_NAME    = "exit_action";
+constexpr const char* TRIGGER_ACTION_NODE_NAME = "trigger_action";
+constexpr const char* TRANSITIONS_NODE_NAME    = "transitions";
+constexpr const char* TRANSITION_NODE_NAME     = "transition";
+constexpr const char* CONDITION_NODE_NAME      = "condition";
+constexpr const char* TARGET_STATE_NODE_NAME   = "target_state";
+
+constexpr const char* ID_ATTR                  = "id";
+constexpr const char* NAME_ATTR                = "name";
+constexpr const char* IMAGE_INDEX_ATTR         = "image_index";
+constexpr const char* RADIUS_ATTR              = "radius";
+constexpr const char* REVERSE_ATTR             = "reverse";
+constexpr const char* SPEED_ATTR               = "speed";
+constexpr const char* DISTANCE_ATTR            = "distance";
+constexpr const char* MIN_DISTANCE_ATTR        = "min_distance";
+constexpr const char* DEFAULT_STATE_INDEX_ATTR = "default_state_index";
+constexpr const char* DAMAGE_POINTS_ATTR       = "damage_points";
+
 #endif

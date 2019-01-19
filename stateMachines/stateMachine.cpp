@@ -53,16 +53,16 @@ void StateMachine::load() {
 
 
 		int defaultStateIndex = 0;
-		pStateMachine->Attribute("default_state_index",&defaultStateIndex);
+		pStateMachine->Attribute(DEFAULT_STATE_INDEX_ATTR,&defaultStateIndex);
 		TiXmlHandle hStateMachine(pStateMachine);
-		TiXmlHandle hStates = hStateMachine.FirstChildElement("states");
+		TiXmlHandle hStates = hStateMachine.FirstChildElement(STATES_NODE_NAME);
 
 		// States
 		TiXmlElement* stateElem = hStates.FirstChild().Element();
 		int stateIndex = 0;
 		for (stateElem; stateElem; stateElem = stateElem->NextSiblingElement()) {
 			int stateId = 0;
-			stateElem->Attribute("id", &stateId);
+			stateElem->Attribute(ID_ATTR, &stateId);
 			State* state = getStateInstance(stateId);
 			if (state) {
 				if (stateIndex == defaultStateIndex) {
@@ -70,22 +70,22 @@ void StateMachine::load() {
 				}
 
 				// Actions
-				state->setEnterAction(getActionInstance(stateElem->FirstChildElement("enter_action")));
-				state->setExitAction(getActionInstance(stateElem->FirstChildElement("exit_action")));
-				state->setStateAction(getActionInstance(stateElem->FirstChildElement("state_action")));
+				state->setEnterAction(getActionInstance(stateElem->FirstChildElement(ENTER_ACTION_NODE_NAME)));
+				state->setExitAction(getActionInstance(stateElem->FirstChildElement(EXIT_ACTION_NODE_NAME)));
+				state->setStateAction(getActionInstance(stateElem->FirstChildElement(STATE_ACTION_NODE_NAME)));
 
 				// Transitions
-				TiXmlHandle hTransitions = stateElem->FirstChildElement("transitions");
+				TiXmlHandle hTransitions = stateElem->FirstChildElement(TRANSITIONS_NODE_NAME);
 				TiXmlElement* transitionElem = hTransitions.FirstChild().Element();
 				for (transitionElem; transitionElem; transitionElem = transitionElem->NextSiblingElement()) {
-					Condition* condition = getConditionInstance(transitionElem->FirstChildElement("condition"));
+					Condition* condition = getConditionInstance(transitionElem->FirstChildElement(CONDITION_NODE_NAME));
 					
-					TiXmlElement* targetStateElem = transitionElem->FirstChildElement("target_state");
+					TiXmlElement* targetStateElem = transitionElem->FirstChildElement(TARGET_STATE_NODE_NAME);
 					int targetStateId = 0;
-					targetStateElem->Attribute("id", &targetStateId);
+					targetStateElem->Attribute(ID_ATTR, &targetStateId);
 					State* targetState = getStateInstance(targetStateId);
 
-					Action* triggerAction = getActionInstance(transitionElem->FirstChildElement("trigger_action"));
+					Action* triggerAction = getActionInstance(transitionElem->FirstChildElement(TRIGGER_ACTION_NODE_NAME));
 
 					state->addTransition(new Transition(condition, targetState, triggerAction));
 				}
@@ -143,12 +143,12 @@ State* StateMachine::getStateInstance(int stateId) {
 Action* StateMachine::getActionInstance(TiXmlElement* actionElem) {
 	Action* action = nullptr;
 	int actionId = 0;
-	actionElem->Attribute("id", &actionId);
+	actionElem->Attribute(ID_ATTR, &actionId);
 	switch (actionId) {
 		case A_ChangeImage: {
 			action = new ChangeImageAction(*this);
 			int imageIndex = 0;
-			actionElem->Attribute("image_index", &imageIndex);
+			actionElem->Attribute(IMAGE_INDEX_ATTR, &imageIndex);
 			static_cast<ChangeImageAction*>(action)->imageIndex = imageIndex;
 			break;
 		}
@@ -159,7 +159,7 @@ Action* StateMachine::getActionInstance(TiXmlElement* actionElem) {
 		case A_AttackEnemy: {
 			action = new AttackEnemyAction(*this);
 			int damagePoints = 0;
-			actionElem->Attribute("damage_points", &damagePoints);
+			actionElem->Attribute(DAMAGE_POINTS_ATTR, &damagePoints);
 			static_cast<AttackEnemyAction*>(action)->damagePoints = damagePoints;
 			break;
 		}
@@ -173,17 +173,17 @@ Action* StateMachine::getActionInstance(TiXmlElement* actionElem) {
 		}
 		case A_CircularMovement: {
 			int radius = 0;
-			actionElem->Attribute("radius", &radius);
+			actionElem->Attribute(RADIUS_ATTR, &radius);
 			if (!&radius) radius = 0;
 
 			int iReverse = 0;
-			actionElem->Attribute("reverse", &iReverse);
+			actionElem->Attribute(REVERSE_ATTR, &iReverse);
 			bool reverse = false;
 			if (!&iReverse) reverse = false;
 			else reverse = iReverse;
 
 			float speed = 0.f;
-			actionElem->Attribute("speed", &speed);
+			actionElem->Attribute(SPEED_ATTR, &speed);
 			if (!&speed) speed = 0.f;
 
 			action = new CircularMovementAction(*this, radius, reverse, speed);
@@ -201,26 +201,26 @@ Action* StateMachine::getActionInstance(TiXmlElement* actionElem) {
 Condition* StateMachine::getConditionInstance(TiXmlElement* conditionElem) {
 	Condition* condition = nullptr;
 	int conditionId = 0;
-	conditionElem->Attribute("id", &conditionId);
+	conditionElem->Attribute(ID_ATTR, &conditionId);
 	switch (conditionId) {
 		case C_CanSeeEnemy: {
 			condition = new CanSeeEnemy(*this);
 			float distance = 0;
-			conditionElem->Attribute("distance", &distance);
+			conditionElem->Attribute(DISTANCE_ATTR, &distance);
 			static_cast<CanSeeEnemy*>(condition)->distance = distance;
 			break;
 		}
 		case C_CanAttackEnemy: {
 			condition = new CanAttackEnemy(*this);
 			float distance = 0;
-			conditionElem->Attribute("distance", &distance);
+			conditionElem->Attribute(DISTANCE_ATTR, &distance);
 			static_cast<CanAttackEnemy*>(condition)->distance = distance;
 			break;
 		}
 		case C_CannotAttackEnemy: {
 			condition = new CannotAttackEnemy(*this);
 			float distance = 0;
-			conditionElem->Attribute("distance", &distance);
+			conditionElem->Attribute(DISTANCE_ATTR, &distance);
 			static_cast<CannotAttackEnemy*>(condition)->distance = distance;
 			break;
 		}
@@ -235,7 +235,7 @@ Condition* StateMachine::getConditionInstance(TiXmlElement* conditionElem) {
 		case C_ReachedTargetPoint: {
 			condition = new ReachedTargetPoint(*this);
 			float distance = 0;
-			conditionElem->Attribute("distance", &distance);
+			conditionElem->Attribute(DISTANCE_ATTR, &distance);
 			static_cast<ReachedTargetPoint*>(condition)->distance = distance;
 			break;
 		}
