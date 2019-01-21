@@ -125,24 +125,96 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character.cpp" />
+    <ClCompile Include="enemy.cpp" />
     <ClCompile Include="gameConfig.cpp" />
     <ClCompile Include="host\FolderWatcher-win.cpp" />
     <ClCompile Include="host\GlutHost.cpp" />
     <ClCompile Include="host\GlutHostMain.cpp" />
     <ClCompile Include="host\ParticlePresets.cpp" />
+    <ClCompile Include="obstacles.cpp" />
     <ClCompile Include="params.cpp" />
+    <ClCompile Include="pathPoints.cpp" />
+    <ClCompile Include="stateMachines\action.cpp" />
+    <ClCompile Include="stateMachines\attackEnemyAction.cpp" />
+    <ClCompile Include="stateMachines\attackState.cpp" />
+    <ClCompile Include="stateMachines\canAttackEnemy.cpp" />
+    <ClCompile Include="stateMachines\cannotAttackEnemycpp.cpp" />
+    <ClCompile Include="stateMachines\canSeeEnemy.cpp" />
+    <ClCompile Include="stateMachines\changeImageAction.cpp" />
+    <ClCompile Include="stateMachines\circularMovementAction.cpp" />
+    <ClCompile Include="stateMachines\condition.cpp" />
+    <ClCompile Include="stateMachines\deadState.cpp" />
+    <ClCompile Include="stateMachines\idleState.cpp" />
+    <ClCompile Include="stateMachines\isDead.cpp" />
+    <ClCompile Include="stateMachines\isHit.cpp" />
+    <ClCompile Include="stateMachines\pursueEnemyAction.cpp" />
+    <ClCompile Include="stateMachines\pursueState.cpp" />
+    <ClCompile Include="stateMachines\reachedTargetPoint.cpp" />
+    <ClCompile Include="stateMachines\restoreHitAction.cpp" />
+    <ClCompile Include="stateMachines\runawayState.cpp" />
+    <ClCompile Include="stateMachines\setDeadAction.cpp" />
+    <ClCompile Include="stateMachines\setTargetPointAction.cpp" />
+    <ClCompile Include="stateMachines\stateMachine.cpp" />
+    <ClCompile Include="stateMachines\state.cpp" />
+    <ClCompile Include="stateMachines\transition.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="steering\alignSteering.cpp" />
+    <ClCompile Include="steering\alignToMovementSteering.cpp" />
+    <ClCompile Include="steering\arriveSteering.cpp" />
+    <ClCompile Include="steering\fleeSteering.cpp" />
+    <ClCompile Include="steering\obstacleAvoidanceSteering.cpp" />
+    <ClCompile Include="steering\pathFollowingSteering.cpp" />
+    <ClCompile Include="steering\pursueSteering.cpp" />
+    <ClCompile Include="steering\seekSteering.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
+    <ClInclude Include="enemy.h" />
     <ClInclude Include="gameConfig.h" />
+    <ClInclude Include="gameEntity.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="host\FolderWatcher-win.h" />
     <ClInclude Include="host\GlutHost.h" />
     <ClInclude Include="host\ParticlePresets.h" />
+    <ClInclude Include="obstacles.h" />
     <ClInclude Include="params.h" />
+    <ClInclude Include="pathPoints.h" />
+    <ClInclude Include="stateMachines\action.h" />
+    <ClInclude Include="stateMachines\attackEnemyAction.h" />
+    <ClInclude Include="stateMachines\attackState.h" />
+    <ClInclude Include="stateMachines\canAttackEnemy.h" />
+    <ClInclude Include="stateMachines\cannotAttackEnemy.h" />
+    <ClInclude Include="stateMachines\canSeeEnemy.h" />
+    <ClInclude Include="stateMachines\changeImageAction.h" />
+    <ClInclude Include="stateMachines\circularMovementAction.h" />
+    <ClInclude Include="stateMachines\condition.h" />
+    <ClInclude Include="stateMachines\deadState.h" />
+    <ClInclude Include="stateMachines\idleState.h" />
+    <ClInclude Include="stateMachines\isDead.h" />
+    <ClInclude Include="stateMachines\isHit.h" />
+    <ClInclude Include="stateMachines\pursueEnemyAction.h" />
+    <ClInclude Include="stateMachines\pursueState.h" />
+    <ClInclude Include="stateMachines\reachedTargetPoint.h" />
+    <ClInclude Include="stateMachines\restoreHitAction.h" />
+    <ClInclude Include="stateMachines\runawayState.h" />
+    <ClInclude Include="stateMachines\setDeadAction.h" />
+    <ClInclude Include="stateMachines\setTargetPointAction.h" />
+    <ClInclude Include="stateMachines\stateMachine.h" />
+    <ClInclude Include="stateMachines\state.h" />
+    <ClInclude Include="stateMachines\transition.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="steering\alignSteering.h" />
+    <ClInclude Include="steering\alignToMovementSteering.h" />
+    <ClInclude Include="steering\arriveSteering.h" />
+    <ClInclude Include="steering\fleeSteering.h" />
+    <ClInclude Include="steering\iAlignSteering.h" />
+    <ClInclude Include="steering\iSteering.h" />
+    <ClInclude Include="steering\obstacleAvoidanceSteering.h" />
+    <ClInclude Include="steering\pathFollowingSteering.h" />
+    <ClInclude Include="steering\pursueSteering.h" />
+    <ClInclude Include="steering\seekSteering.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sample\test.lua" />
