@@ -1,6 +1,5 @@
 #include <stdafx.h>
 #include "reachedTargetPoint.h"
-#include "enemy.h"
 
 ReachedTargetPoint::ReachedTargetPoint(const StateMachine& stateMachine) :
 	Condition(stateMachine),
@@ -9,9 +8,7 @@ ReachedTargetPoint::ReachedTargetPoint(const StateMachine& stateMachine) :
 bool ReachedTargetPoint::check() const {
 	bool result = false;
 
-	Enemy* enemy = static_cast<Enemy*>(mStateMachine.getEntity());
-	if (enemy) {
-		result = (enemy->GetLoc() - enemy->GetTargetPoint()).Length() <= distance;
-	}
+	result = (mStateMachine.getEntity()->GetLoc() - mStateMachine.getEntity()->GetTargetPoint()).Length() <= distance;
+	
 	return result;
 }

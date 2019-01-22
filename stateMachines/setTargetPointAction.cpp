@@ -1,6 +1,5 @@
 #include <stdafx.h>
 #include "setTargetPointAction.h"
-#include "enemy.h"
 #include "steering/arriveSteering.h"
 #include "globals.h"
 
@@ -10,20 +9,16 @@ SetTargetPointAction::SetTargetPointAction(const StateMachine& stateMachine) :
 	Action(stateMachine) {}
 
 void SetTargetPointAction::start() {
-	Enemy* enemy = static_cast<Enemy*>(mStateMachine.getEntity());
-	if (enemy) {
-		USVec2D currentLoc = enemy->GetLoc();
+	GameEntity* entity = mStateMachine.getEntity();
+	if (entity) {
+		USVec2D currentLoc = entity->GetLoc();
 		USVec2D nextLoc;
+		int attempts = 100;
 		do {
+			--attempts;
 			nextLoc = USVec2D(Rand(-MAX_VIEWPORT_WIDTH_HALF, MAX_VIEWPORT_WIDTH_HALF), Rand(-MAX_VIEWPORT_HEIGHT_HALF, MAX_VIEWPORT_HEIGHT_HALF));
-		} while (currentLoc.DistSqrd(nextLoc) < MIN_DISTANCE_NEXT_POINT * MIN_DISTANCE_NEXT_POINT);
-		enemy->SetTargetPoint(nextLoc.mX, nextLoc.mY);
-		enemy->SetSteering(new ArriveSteering(*enemy, enemy->GetTargetPoint()));
+		} while (attempts && currentLoc.DistSqrd(nextLoc) < MIN_DISTANCE_NEXT_POINT * MIN_DISTANCE_NEXT_POINT);
+		entity->SetTargetPoint(nextLoc.mX, nextLoc.mY);
+		entity->SetSteering(new ArriveSteering(*entity, entity->GetTargetPoint()));
 	}
-}
-
-void SetTargetPointAction::update() {
-}
-
-void SetTargetPointAction::end() {
 }

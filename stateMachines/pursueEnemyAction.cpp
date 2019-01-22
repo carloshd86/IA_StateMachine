@@ -12,8 +12,7 @@ void PursueEnemyAction::start() {
 	if (character) {
 		Enemy* enemy = character->GetEnemy();
 		if (enemy) {
-			character->ClearSteeringWeights();
-			character->AddSteeringWeight(Character::SteeringWeight(new PursueSteering(*character, *enemy), 1.f));
+			character->SetSteering(new PursueSteering(*character, *enemy));
 		}
 	}
 }

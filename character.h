@@ -47,6 +47,12 @@ public:
 	void ClearSteeringWeights();
 	void AddSteeringWeight(SteeringWeight& steeringWeight);
 
+	bool IsDead() const;
+
+	USVec2D GetTargetPoint () const;
+	void    SetTargetPoint (float x, float y);
+	void    SetSteering    (ISteering* steering);
+
 private:
 
 	USVec2D mLinearVelocity;
@@ -60,6 +66,8 @@ private:
 	std::vector<SteeringWeight> mSteeringWeights;
 	IAlignSteering*             mAlignSteering;
 	StateMachine*               mStateMachine;
+
+	USVec2D mTargetPoint;
 
 	void AdjustAccelerationModule(USVec2D& acceleration);
 

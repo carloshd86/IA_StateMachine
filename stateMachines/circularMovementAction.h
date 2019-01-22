@@ -9,7 +9,6 @@ public:
 
 	void start();
 	void update();
-	void end();
 
 private:
 	USVec2D mCircleCenter;
