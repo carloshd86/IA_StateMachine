@@ -11,15 +11,15 @@
 const float Enemy::MIN_DISTANCE_TO_REACH_TARGET = 25.f;
 
 Enemy::Enemy() : 
-	mLinearVelocity  (0.0f, 0.0f), 
-	mAngularVelocity (0.0f),
+	mLinearVelocity  (0.f, 0.f), 
+	mAngularVelocity (0.f),
 	mSteering        (nullptr),
 	mAlignSteering   (nullptr),
 	mTarget          (nullptr),
 	mStateMachine    (nullptr),
 	mLifePoints      (1),
-	mHit             (false)
-
+	mHit             (false),
+	mTargetPoint     (0.f, 0.f)
 {
 	RTTI_BEGIN
 		RTTI_EXTEND (MOAIEntity2D)
@@ -59,7 +59,7 @@ void Enemy::OnStop()
 
 void Enemy::OnUpdate(float step)
 {
-	mStateMachine->update();
+	if(mStateMachine) mStateMachine->update();
 
 	USVec3D pos             = GetLoc();
 	float   rot             = GetRot();
@@ -103,11 +103,11 @@ void Enemy::Damage(int lifePoints) {
 	mHit = true;
 }
 
-bool Enemy::IsDead() {
+bool Enemy::IsDead() const {
 	return mLifePoints <= 0;
 }
 
-bool Enemy::GetHit() {
+bool Enemy::GetHit() const {
 	return mHit;
 }
 
@@ -115,7 +115,7 @@ void Enemy::SetHit(bool hit) {
 	mHit = hit;
 }
 
-USVec2D Enemy::GetTargetPoint() {
+USVec2D Enemy::GetTargetPoint() const {
 	return mTargetPoint;
 }
 

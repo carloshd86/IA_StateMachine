@@ -3,11 +3,12 @@
 #include "globals.h"
 
 CircularMovementAction::CircularMovementAction(const StateMachine& stateMachine, int radius, bool reverse, float speed) :
-	Action   (stateMachine),
-	mRadius  (radius),
-    mReverse (reverse),
-	mSpeed   (speed),
-    mAngle   (0.f) {}
+	Action        (stateMachine),
+	mRadius       (radius),
+    mReverse      (reverse),
+	mSpeed        (speed),
+	mCircleCenter (0.f, 0.f),
+	mAngle        (0.f) {}
 
 void CircularMovementAction::start() {
 	if (mRadius < 0) mRadius = 0;
@@ -36,7 +37,4 @@ void CircularMovementAction::update() {
 		entity->SetLoc(USVec3D(newX, newY, 0.f));
 		mAngle += velMultiplier * mSpeed;
 	}
-}
-
-void CircularMovementAction::end() {
 }

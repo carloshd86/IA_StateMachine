@@ -16,7 +16,8 @@ Character::Character() :
 	mAngularVelocity (0.0f),
 	mAlignSteering   (nullptr),
 	mStateMachine    (nullptr),
-	mEnemy           (nullptr)
+	mEnemy           (nullptr),
+	mTargetPoint     (0.f, 0.f)
 {
 	RTTI_BEGIN
 		RTTI_EXTEND (MOAIEntity2D)
@@ -54,7 +55,7 @@ void Character::OnStop()
 
 void Character::OnUpdate(float step)
 {
-	mStateMachine->update();
+	if(mStateMachine) mStateMachine->update();
 
 	USVec3D pos             = GetLoc();
 	float   rot             = GetRot();
@@ -137,6 +138,26 @@ void Character::SetEnemy(Enemy& enemy)
 Enemy* Character::GetEnemy() 
 {
 	return mEnemy;
+}
+
+bool Character::IsDead() const {
+	return false;
+}
+
+USVec2D Character::GetTargetPoint() const {
+	return mTargetPoint;
+}
+
+void Character::SetTargetPoint(float x, float y) {
+	mTargetPoint.mX = x;
+	mTargetPoint.mY = y;
+}
+
+void Character::SetSteering(ISteering* steering) {
+	ClearSteeringWeights();
+	if (steering) {
+		AddSteeringWeight(Character::SteeringWeight(steering, 1.f));
+	}
 }
 
 // Lua configuration

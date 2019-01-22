@@ -8,8 +8,6 @@ public:
 	SetTargetPointAction(const StateMachine& stateMachine);
 
 	void start();
-	void update();
-	void end();
 
 private:
 	static const float MIN_DISTANCE_NEXT_POINT;

@@ -14,7 +14,8 @@ bool CanAttackEnemy::check() const {
 	if (character) {
 		Enemy* enemy = character->GetEnemy();
 		if (enemy) {
-			result = !enemy->IsDead() && !enemy->GetHit() && (enemy->GetLoc() - character->GetLoc()).Length() <= distance;
+			float distSqr = (USVec2D(enemy->GetLoc()) - USVec2D(character->GetLoc())).LengthSquared();
+			result = !enemy->IsDead() && !enemy->GetHit() && distSqr <= distance * distance;
 		}
 	}
 	return result;
